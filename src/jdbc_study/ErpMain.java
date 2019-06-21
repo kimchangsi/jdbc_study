@@ -15,7 +15,10 @@ public class ErpMain extends JFrame {
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
-
+		System.out.println(System.getProperty("file.separator"));
+		System.out.println(System.getProperty("user.dir")); // 현재경로가 나옴실행시킨
+		System.out.println("첫번째 수정");
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -27,11 +30,8 @@ public class ErpMain extends JFrame {
 			}
 		});
 
-//		System.out.println(System.getProperty("file.separator"));
-
-		/*
-		 * System.out.println(System.getProperty("user.dir")); //현재경로가 나옴실행시킨
-		 */ }
+		
+	}
 
 	/**
 	 * Create the frame.
