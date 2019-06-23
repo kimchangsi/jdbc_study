@@ -1,18 +1,19 @@
 package jdbc_study.ui.content;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import jdbc_study.dto.Department;
 import jdbc_study.dto.Employee;
-
-import javax.swing.UIManager;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class PanelEmployee extends JPanel {
@@ -21,7 +22,8 @@ public class PanelEmployee extends JPanel {
 	private JTextField tfTitle;
 	private JTextField tfManager;
 	private JTextField tfSalary;
-	private JTextField tfDno;
+	private JComboBox<Department> cmbDno;
+	private JComboBox<Employee> cmbManager;
 
 	public PanelEmployee() {
 
@@ -59,9 +61,12 @@ public class PanelEmployee extends JPanel {
 		lblManager.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblManager);
 		
-		tfManager = new JTextField();
-		tfManager.setColumns(10);
-		add(tfManager);
+		cmbManager = new JComboBox<Employee>();
+		add(cmbManager);
+		
+		/*
+		 * tfManager = new JTextField(); tfManager.setColumns(10); add(tfManager);
+		 */
 		
 		JLabel lblSalary = new JLabel("\uC6D4\uAE09");
 		lblSalary.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -75,19 +80,21 @@ public class PanelEmployee extends JPanel {
 		lblDno.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblDno);
 		
-		tfDno = new JTextField();
-		tfDno.setColumns(10);
-		add(tfDno);
+		cmbDno = new JComboBox<Department>();
+		add(cmbDno);
+		
+		
+		
 	}
 	
 	public void setEmployee(Employee emp) {
 		tfEmpNo.setText(emp.getEmpNo()+"");
 		tfEmpName.setText(emp.getEmpName());
 		tfTitle.setText(emp.getTitle());
-		tfManager.setText(emp.getMananger().getEmpNo()+"");
+		/* tfManager.setText(emp.getMananger().getEmpNo()+""); */
+		cmbManager.setSelectedItem(emp.getMananger());
 		tfSalary.setText(emp.getSalary()+"");
-		tfDno.setText(emp.getDno().getDeptNo()+"");
-		
+		cmbDno.setSelectedItem(emp.getDno());
 		
 	}
 	
@@ -95,9 +102,9 @@ public class PanelEmployee extends JPanel {
 		int empNo = Integer.parseInt(tfEmpNo.getText().trim());
 		String empName = tfEmpName.getText().trim();
 		String title = tfTitle.getText().trim();
-		int manager = Integer.parseInt(tfManager.getText().trim());
+		int manager = ((Employee)cmbManager.getSelectedItem()).getEmpNo();
 		int salary = Integer.parseInt(tfSalary.getText().trim());
-		int dno = Integer.parseInt(tfDno.getText().trim());
+		int dno = ((Department)cmbDno.getSelectedItem()).getDeptNo();
 		return new Employee(empNo, empName, title, new Employee(manager), salary, new Department(dno));
 	}
 	
@@ -107,7 +114,8 @@ public class PanelEmployee extends JPanel {
 		tfTitle.setText("");
 		tfManager.setText("");
 		tfSalary.setText("");
-		tfDno.setText("");
+		cmbDno.setSelectedIndex(-1);
+		cmbManager.setSelectedIndex(-1);
 	}
 	
 	public JTextField getTfEmpNo() {
@@ -118,9 +126,25 @@ public class PanelEmployee extends JPanel {
 		tfEmpNo.setEditable(isEditable);
 		tfEmpName.setEditable(isEditable);
 		tfTitle.setEditable(isEditable);
-		tfManager.setEditable(isEditable);
 		tfSalary.setEditable(isEditable);
-		tfDno.setEditable(isEditable);
+		cmbDno.setEnabled(isEditable);
+		cmbManager.setEnabled(isEditable);
+	}
+	
+	public void setCmbDno(List<Department> item) {
+		System.out.println(item);
+		/* cmbDno.removeItemAt(0); */
+		for(Department d : item) {
+			cmbDno.addItem(d);
+		}
+	}
+	
+	public void setCmbManager(List<Employee> item) {
+		System.out.println(item);
+		/* cmbDno.removeItemAt(0); */
+		for(Employee e : item) {
+			cmbManager.addItem(e);
+		}
 	}
 
 }
