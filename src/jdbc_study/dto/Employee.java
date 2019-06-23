@@ -90,11 +90,34 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format("[%s, %s, %s, %s, %s, %s]", empNo, empName, title, mananger.getEmpNo(), salary,
-				dno.getDeptNo());
+		return String.format("%s (%d)", empName, mananger.getEmpNo());
 	}
 
 	public Object[] toArray() {
 		return new Object[] { empNo, empName, title, mananger.getEmpNo(), salary, dno.getDeptNo() };
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + empNo;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Employee))
+			return false;
+		Employee other = (Employee) obj;
+		if (empNo != other.empNo)
+			return false;
+		return true;
+	}
+	
+	
 }
