@@ -20,7 +20,6 @@ public class PanelEmployee extends JPanel {
 	private JTextField tfEmpNo;
 	private JTextField tfEmpName;
 	private JTextField tfTitle;
-	private JTextField tfManager;
 	private JTextField tfSalary;
 	private JComboBox<Department> cmbDno;
 	private JComboBox<Employee> cmbManager;
@@ -112,7 +111,6 @@ public class PanelEmployee extends JPanel {
 		tfEmpNo.setText("");
 		tfEmpName.setText("");
 		tfTitle.setText("");
-		tfManager.setText("");
 		tfSalary.setText("");
 		cmbDno.setSelectedIndex(-1);
 		cmbManager.setSelectedIndex(-1);
