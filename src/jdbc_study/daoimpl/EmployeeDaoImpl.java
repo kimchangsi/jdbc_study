@@ -37,7 +37,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee selectEmployeetByNo(Employee employee) throws SQLException {
+	public Employee selectEmployeetByNo(Employee employee) throws SQLException  {
 		String sql = "select empno, empname, title, manager, salary, dno, pic from employee where empno = ?";
 		Employee emp = null;
 		try (Connection conn = MySQLjdbcUtil.getConnection();
