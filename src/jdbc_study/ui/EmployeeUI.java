@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import jdbc_study.dao.EmployeeDao;
+import jdbc_study.dto.Department;
 import jdbc_study.dto.Employee;
 import jdbc_study.ui.content.PanelEmployee;
 
@@ -27,13 +29,27 @@ public class EmployeeUI extends JFrame implements ActionListener {
 	private EmployeeDao dao;
 	
 	private ErpManagementUI erpManagementUI;
+	private List<Department> lists;
+	private List<Employee> listsEmp;
 	
 	public EmployeeUI() {
 		initComponents();
+		
 	}
 	
 	public void setDao(EmployeeDao dao) {
 		this.dao = dao;
+	}
+	
+	public void setList(List<Department> lists) {
+		this.lists = lists;
+		pContent.setCmbDno(lists);
+	}
+	
+
+	public void setListsEmp(List<Employee> listsEmp) {
+		this.listsEmp = listsEmp;
+		pContent.setCmbManager(listsEmp);
 	}
 
 	private void initComponents() {
@@ -90,6 +106,7 @@ public class EmployeeUI extends JFrame implements ActionListener {
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Employee newEmp = pContent.getEmployee();
+		System.out.println(newEmp);
 		int res;
 		try {
 			res = dao.insertEmployee(newEmp);
