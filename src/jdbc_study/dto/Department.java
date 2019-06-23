@@ -45,11 +45,34 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return String.format("Department [deptNo=%s, deptName=%s, floor=%s]", deptNo, deptName, floor);
+		return String.format("%s(%s)",deptName, deptNo );
 	}
 	
 	public Object[] toArray() {
 		return new Object[]{deptNo, deptName, floor};
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + deptNo;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Department))
+			return false;
+		Department other = (Department) obj;
+		if (deptNo != other.deptNo)
+			return false;
+		return true;
+	}
+
+	
 }
