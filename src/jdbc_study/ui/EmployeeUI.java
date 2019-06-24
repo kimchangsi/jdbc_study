@@ -53,8 +53,8 @@ public class EmployeeUI extends JFrame implements ActionListener {
 	}
 
 	private void initComponents() {
-		setTitle("\uC0AC\uC6D0\uAD00\uB9AC");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("\uC0AC\uC6D0\uAD00\uB9AC");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,6 +98,7 @@ public class EmployeeUI extends JFrame implements ActionListener {
 				pContent.clearTextField();
 				btnAdd.setText("Ãß°¡");
 			}
+			this.dispose();
 			erpManagementUI.refreshUI();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

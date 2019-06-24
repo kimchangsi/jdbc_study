@@ -94,7 +94,13 @@ public class Employee {
 	}
 
 	public Object[] toArray() {
-		return new Object[] { empNo, empName, title, mananger.getEmpNo(), salary, dno.getDeptNo() };
+		return new Object[] { empNo,
+										empName, 
+										title,
+										mananger.getEmpName()!=null ? mananger.getEmpName()+ "(" + mananger.getEmpNo()+")" : "없음", 
+										String.format("%,d", salary), //000단위로 ,를 붙여줌
+										dno.getDeptName()+"("+dno.getDeptNo()+")"
+									};
 	}
 
 	@Override

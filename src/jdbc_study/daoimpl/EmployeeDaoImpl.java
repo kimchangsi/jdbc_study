@@ -22,7 +22,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> selectEmployeeByAll() throws SQLException {
-		String sql = "select empno, empname, title, manager, salary, dno, pic from employee";
+		String sql = "select e.empno, e.empname, e.title, m.empno meno , m.empname mname , e.salary, e.dno, d.deptname , e.pic " + 
+				"from employee e left join employee m on e.manager=m.empno join department d on e.dno=d.deptno order by salary desc;";
 		List<Employee> lists = new ArrayList<Employee>();
 
 		try (Connection conn = MySQLjdbcUtil.getConnection();
@@ -30,10 +31,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				ResultSet rs = pstmt.executeQuery();) {
 			log.trace(pstmt);
 			while (rs.next()) {
-				lists.add(getEmployee(rs));
+				lists.add(getEmployeefull(rs));
 			}
 		}
 		return lists;
+	}
+
+	private Employee getEmployeefull(ResultSet rs) throws SQLException {
+		Employee manager = new Employee(rs.getInt("meno"));
+		manager.setEmpName(rs.getString("mname"));
+		
+		Department dept = new Department(rs.getInt("dno"));
+		dept.setDeptName(rs.getString("deptname"));
+		return new Employee(rs.getInt("empno"), rs.getString("empname"), rs.getString("title"),
+				manager, rs.getInt("salary"), dept,
+				rs.getBytes("pic"));
+	}
+	
+	private Employee getEmployee(ResultSet rs) throws SQLException {
+
+		return new Employee(rs.getInt("empno"), rs.getString("empname"), rs.getString("title"),
+				new Employee(rs.getInt("manager")), rs.getInt("salary"), new Department(rs.getInt("dno")),
+				rs.getBytes("pic"));
 	}
 
 	@Override
@@ -55,12 +74,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
-	private Employee getEmployee(ResultSet rs) throws SQLException {
-
-		return new Employee(rs.getInt("empno"), rs.getString("empname"), rs.getString("title"),
-				new Employee(rs.getInt("manager")), rs.getInt("salary"), new Department(rs.getInt("dno")),
-				rs.getBytes("pic"));
-	}
 
 	@Override
 	public int insertEmployee(Employee employee) throws SQLException {

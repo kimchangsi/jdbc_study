@@ -158,7 +158,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void actionPerformedBtnDelete2(ActionEvent e) {
+	private void actionPerformedBtnDelete2(ActionEvent e) { //사원 삭제
 		String empNo = JOptionPane.showInputDialog("삭제할 사원번호를 입력하세요");
 
 		try {
@@ -177,11 +177,9 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void actionPerformedBtnUpdate2(ActionEvent e) {
+	private void actionPerformedBtnUpdate2(ActionEvent e) { //사원수정
 		String empNo = JOptionPane.showInputDialog("수정할 사원번호를 입력하세요");
 		Employee selEmp;
-		dao = new DepartmentDaoImpl();
-		dao2 = new EmployeeDaoImpl();
 		try {
 			selEmp = dao2.selectEmployeetByNo(new Employee(Integer.parseInt(empNo)));
 			if (selEmp == null) {
@@ -192,9 +190,9 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 				frameEmployee = new EmployeeUI();
 				frameEmployee.setParent(this);
 				frameEmployee.setDao(dao2);
-				frameEmployee.setList(dao.selectDepartmentByAll());
-				frameEmployee.setListsEmp(dao2.selectEmployeeByAll());
 			}
+			frameEmployee.setList(dao.selectDepartmentByAll());
+			frameEmployee.setListsEmp(dao2.selectEmployeeByAll());
 			frameEmployee.setEmployee(selEmp);
 			frameEmployee.setVisible(true);
 		
@@ -205,11 +203,9 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void actionPerformedBtnSearch2(ActionEvent e) {
+	private void actionPerformedBtnSearch2(ActionEvent e) { //사원검색
 		String emptNo = JOptionPane.showInputDialog("검색할 사원번호를 입력하세요");
 		Employee selEmp;
-		dao = new DepartmentDaoImpl();
-		dao2= new EmployeeDaoImpl();
 		try {
 			selEmp = dao2.selectEmployeetByNo(new Employee(Integer.parseInt(emptNo)));
 			if (selEmp == null) {
@@ -231,18 +227,17 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 	}
 
 	private void actionPerformedBtnAdd2(ActionEvent e) throws SQLException { //사원추가
-		dao = new DepartmentDaoImpl();
 		if (frameEmployee == null) {
 			frameEmployee = new EmployeeUI();
 			frameEmployee.setParent(ErpManagementUI.this);
 			frameEmployee.setDao(dao2);
-			frameEmployee.setList(dao.selectDepartmentByAll());
-			frameEmployee.setListsEmp(dao2.selectEmployeeByAll());
 		}
+		frameEmployee.setList(dao.selectDepartmentByAll());
+		frameEmployee.setListsEmp(dao2.selectEmployeeByAll());
 		frameEmployee.setVisible(true);
 	}
 
-	private void actionPerformedBtnList2(ActionEvent e) throws SQLException {
+	private void actionPerformedBtnList2(ActionEvent e) throws SQLException { //사원목록
 		if (frameEmployeeList == null) {
 			frameEmployeeList = new EmployeeListUI();
 		}

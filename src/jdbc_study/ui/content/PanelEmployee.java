@@ -125,13 +125,13 @@ public class PanelEmployee extends JPanel {
 		tfEmpName.setEditable(isEditable);
 		tfTitle.setEditable(isEditable);
 		tfSalary.setEditable(isEditable);
-		cmbDno.setEnabled(isEditable);
-		cmbManager.setEnabled(isEditable);
+		cmbDno.setEnabled(isEditable); // combobox는 setEnabled를 사용함
+		cmbManager.setEnabled(isEditable);  // combobox는 setEnabled를 사용함
 	}
 	
 	public void setCmbDno(List<Department> item) {
 		System.out.println(item);
-		/* cmbDno.removeItemAt(0); */
+		 cmbDno.removeAllItems();
 		for(Department d : item) {
 			cmbDno.addItem(d);
 		}
@@ -139,7 +139,7 @@ public class PanelEmployee extends JPanel {
 	
 	public void setCmbManager(List<Employee> item) {
 		System.out.println(item);
-		/* cmbDno.removeItemAt(0); */
+		cmbManager.removeAllItems();
 		for(Employee e : item) {
 			cmbManager.addItem(e);
 		}
