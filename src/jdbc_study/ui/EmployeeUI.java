@@ -34,7 +34,7 @@ public class EmployeeUI extends JFrame implements ActionListener {
 	
 	public EmployeeUI() {
 		initComponents();
-		
+	
 	}
 	
 	public void setDao(EmployeeDao dao) {
@@ -134,5 +134,9 @@ public class EmployeeUI extends JFrame implements ActionListener {
 
 	public void setParent(ErpManagementUI erpManagementUI) {
 		this.erpManagementUI = erpManagementUI;
+	}
+	
+	public void Noimage() {
+		pContent.setNoImage();
 	}
 }

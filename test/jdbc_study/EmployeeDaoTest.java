@@ -80,6 +80,7 @@ public class EmployeeDaoTest {
 		try(InputStream is = new FileInputStream(imgFile);){
 			pic = new byte[is.available()]; //배열의 가용크기
 			is.read(pic); //pic의 내용을 읽어서 들어감
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("해당파일을 찾을수 없음");
 		} catch (IOException e) {

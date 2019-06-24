@@ -234,6 +234,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		}
 		frameEmployee.setList(dao.selectDepartmentByAll());
 		frameEmployee.setListsEmp(dao2.selectEmployeeByAll());
+		frameEmployee.Noimage();
 		frameEmployee.setVisible(true);
 	}
 
